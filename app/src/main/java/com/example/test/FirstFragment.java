@@ -10,6 +10,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.test.databinding.FragmentFirstBinding;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
@@ -19,7 +26,6 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -27,19 +33,21 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.counterInputNumber.setText(String.valueOf(0));
+
+        String initString = "Java vs PHP";
+        binding.counterInputNumber.setText(initString);
 
         binding.buttonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValueOnInput(1);
+                setValueOnInput(0.5);
             }
         });
 
         binding.buttonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValueOnInput(-1);
+                setValueOnInput(-0.5);
             }
         });
     }
@@ -50,24 +58,19 @@ public class FirstFragment extends Fragment {
         binding = null;
     }
 
-    /**
-     *
-     * @param view view where the click come from
-     */
-    public void increment(@NonNull View view) {
-        setValueOnInput(1);
-    }
-
-    /**
-     *
-     * @param view view where the click come from
-     */
-    public void decrement(@NonNull View view) {
-        setValueOnInput(-1);
-    }
-
-    private void setValueOnInput(int value) {
-        int inputText = Integer.parseInt(binding.counterInputNumber.getText().toString());
+    private void setValueOnInput(double value) {
+        // Gestion des exceptions
+        double inputText = 0.0;
+        try {
+            inputText = Double.parseDouble(binding.counterInputNumber.getText().toString());
+        } catch (Exception e) {
+            if (e instanceof NullPointerException) {
+                // Je fais un traitement précis s'il m'a renvoyé un NPE (NullPointerException)
+                inputText = 0.0;
+            }
+            // Affichage du message qui a déclenché l'exception
+            // ignored.getMessage()
+        }
         inputText = inputText + value;
         binding.counterInputNumber.setText(String.valueOf(inputText));
     }

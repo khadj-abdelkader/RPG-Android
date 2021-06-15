@@ -33,7 +33,7 @@
 * Il va falloir créer une classe Ability
   * damage : float (pas de gestion de min/max)
   * name : string
-  * coût de mana : int
+  * manaCost : int
 
 * Une RpgEntity peut avoir une Ability (ou ne pas en avoir)
 
@@ -49,7 +49,7 @@
 * Un Hero est un "RpgEntity"
 * Par défaut :
     * tous les héros créés sont de niveau 1
-    * scoreCriticalStrike : 11%
+    * scoreCriticalStrike : 11
     * criticalDamage : 150%
 
 * Notes importante :
@@ -62,9 +62,9 @@
   * Le scoreCriticalStrike varie en fonction de la caractéristique principale : carac * 0.06
 
 
-### Créer la classe "Monstre"
+### Créer la classe "Monsters"
 
-- Un "Monstre" est un "RpgEntity"
+- Un "Monsters" est un "RpgEntity"
 
 
 ### Héro : Mage
@@ -105,6 +105,7 @@
 ### Pour poursuivre
 
 * Ajouter une fonction levelUp, elle permet de faire une montée de niveau, on augmente le niveau de 1
+* Seul les Hero peuvent levelUp
 
 #### Cependant...
 
@@ -127,6 +128,8 @@
   
 
 /!\ Pensez que vos caractéristiques vont changer... Les dégâts aussi !
+
+(PS : Lorsqu'un Hero monte de niveau, il ne regagne pas sa vie, et sa mana)
 
 
 #### Pour la suite du TP - fonction setLevel (dans RpgEntity)
@@ -205,9 +208,9 @@ Les monstres ont leur stats qui varient en fonction de leur niveau
   * damage : caractéristique principale x 1.8 (Rappel : c'est la force)
 
 * Rogue :
-  * name : Embush
+  * name : Ambush
   * coût : 160 mana
-  * damage : caractéristique principale x 1.9 (Rappel : c'est l'agilité)
+  * damage : caractéristique principale x 2.1 (Rappel : c'est l'agilité)
 
 * Dragon :
   * name : Fire Breathe
@@ -226,6 +229,6 @@ Il contiendra Ability et RpgEntity
     
 Deux packages dans "rpg" :
     * heros
-    * monstres
+    * monsters
     
     

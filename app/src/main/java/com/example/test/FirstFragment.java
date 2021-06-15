@@ -38,6 +38,8 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         counter = new Counter(5);
+//      utilisation d'une constante
+//      counter.COUNTER;
 
         binding.counterInputNumber.setText(this.counter.toString());
 

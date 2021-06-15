@@ -20,7 +20,7 @@
 - manaMax : int
 - level : int
 
-(PS : les float sont sur 2 virgules max)
+(PS : les float sont sur 2 chiffres après la virgule max)
 - scoreCriticalStrike : float
 - criticalDamage : float
 - defense : float
@@ -217,10 +217,12 @@ Les monstres ont leur stats qui varient en fonction de leur niveau
 
 ### Organisation des fichiers
 
-Un package principale : 
+Un package principal : 
     * rpg
 
+
 Il contiendra Ability et RpgEntity
+    
     
 Deux packages dans "rpg" :
     * heros

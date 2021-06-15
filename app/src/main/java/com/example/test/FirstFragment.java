@@ -17,9 +17,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import classes.Counter;
+
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+    private Counter counter;
 
     @Override
     public View onCreateView(
@@ -34,20 +37,21 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String initString = "Java vs PHP";
-        binding.counterInputNumber.setText(initString);
+        counter = new Counter(5);
+
+        binding.counterInputNumber.setText(this.counter.toString());
 
         binding.buttonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValueOnInput(0.5);
+                addValue(0.5);
             }
         });
 
         binding.buttonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValueOnInput(-0.5);
+                addValue(-0.5);
             }
         });
     }
@@ -58,21 +62,27 @@ public class FirstFragment extends Fragment {
         binding = null;
     }
 
-    private void setValueOnInput(double value) {
-        // Gestion des exceptions
-        double inputText = 0.0;
-        try {
-            inputText = Double.parseDouble(binding.counterInputNumber.getText().toString());
-        } catch (Exception e) {
-            if (e instanceof NullPointerException) {
-                // Je fais un traitement précis s'il m'a renvoyé un NPE (NullPointerException)
-                inputText = 0.0;
-            }
-            // Affichage du message qui a déclenché l'exception
-            // ignored.getMessage()
-        }
-        inputText = inputText + value;
-        binding.counterInputNumber.setText(String.valueOf(inputText));
+    private void addValue(double incValue) {
+        counter.addValue(incValue);
+        binding.counterInputNumber.setText(counter.toString());
     }
+
+
+    // Exemple de try catch pour les gestions d'exception
+//    private void addValue(Counter counter) {
+//        // Gestion des exceptions
+//        double inputText = 0.0;
+//        try {
+//            inputText = Double.parseDouble(binding.counterInputNumber.getText().toString());
+//        } catch (Exception e) {
+//            if (e instanceof NullPointerException) {
+//                // Je fais un traitement précis s'il m'a renvoyé un NPE (NullPointerException)
+//                inputText = 0.0;
+//            }
+//            // Affichage du message qui a déclenché l'exception
+//            // ignored.getMessage()
+//        }
+//        binding.counterInputNumber.setText(String.valueOf(inputText));
+//    }
 
 }

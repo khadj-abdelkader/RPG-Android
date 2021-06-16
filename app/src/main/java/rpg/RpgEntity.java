@@ -83,9 +83,16 @@ public abstract class RpgEntity {
         this.ability = new Ability(name, damage, manaCost);
     }
 
-    protected boolean attack(RpgEntity rpgEntityTarget) {
+    public boolean attack(RpgEntity rpgEntityTarget) {
         if (this.isDead() || rpgEntityTarget.isDead()) {
             return false;
+        }
+
+        if (this.ability != null) {
+            boolean hasUsedAbility = useAbility(rpgEntityTarget);
+            if (hasUsedAbility) {
+                return true;
+            }
         }
 
         int damage = getRandomBetweenNumber(this.damageMin, this.damageMax);
@@ -94,6 +101,22 @@ public abstract class RpgEntity {
         }
 
         damage *= rpgEntityTarget.getDefenseCoefficient();
+
+        rpgEntityTarget.hp -= damage;
+        return true;
+    }
+
+    private boolean useAbility(RpgEntity rpgEntityTarget) {
+        if (this.ability.getCoolDown() == 0 && this.ability.getManaCost() <= this.mana) {
+            this.ability.setCoolDown(3);
+            rpgEntityTarget.hp -= this.ability.getDamage();
+            this.mana -= this.ability.getManaCost();
+            return true;
+        }
+        if (this.ability.getCoolDown() > 0) {
+            this.ability.setCoolDown(this.ability.getCoolDown()-1);
+        }
         return false;
     }
+
 }

@@ -9,17 +9,20 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.test.databinding.FragmentSecondBinding;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import rpg.Race;
+import rpg.heros.Hero;
 
 public class SecondFragment extends Fragment {
 
-    public static final String HERO_NAME = "heroName";
-    public static final String HERO_RACE = "heroRace";
-    public static final String HERO_CLASS = "heroClass";
+    public static final String HERO = "hero";
 
     private FragmentSecondBinding binding;
 
@@ -57,14 +60,8 @@ public class SecondFragment extends Fragment {
                 String selectedClass = binding.spinnerClasses.getSelectedItem().toString();
 
                 Bundle bundle = new Bundle();
-                bundle.putString(SecondFragment.HERO_NAME, heroName);
-                bundle.putString(SecondFragment.HERO_RACE, race.toString());
-                bundle.putString(SecondFragment.HERO_CLASS, selectedClass);
-                HeroBattleFragment hbf = new HeroBattleFragment();
-                hbf.setArguments(bundle);
-
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_HeroBattleFragment);
+                bundle.putSerializable(SecondFragment.HERO, createHeroFromInfos(heroName, race, selectedClass));
+                Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_HeroBattleFragment, bundle);
             }
         });
     }
@@ -73,6 +70,29 @@ public class SecondFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private Hero createHeroFromInfos(String name, Race race, String heroClass) {
+        Hero hero = null;
+        try {
+            Class classe = Class.forName("rpg.heros." + heroClass);
+            Constructor constructor = classe.getConstructor(Class.forName("java.lang.String"), Class.forName("rpg.Race"));
+            hero = (Hero) constructor.newInstance(name, race);
+            hero.setLevel(60);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (java.lang.InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return hero;
     }
 
 }

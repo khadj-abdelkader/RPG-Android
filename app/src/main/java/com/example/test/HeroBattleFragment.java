@@ -12,12 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.test.databinding.FragmentHeroBattleBinding;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-
-import rpg.Race;
 import rpg.heros.Hero;
+import rpg.monsters.Dragon;
+import rpg.monsters.Gobelin;
+import rpg.monsters.Monsters;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,43 +37,26 @@ public class HeroBattleFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Bundle bundle = this.getArguments();
+        Hero hero = null;
+
         if (bundle != null) {
-//            String heroName = (String) bundle.get(SecondFragment.HERO_NAME);
-//            Log.i("Form data", heroName);
-//            Race heroRace = Race.valueOf((String) bundle.get(SecondFragment.HERO_RACE));
-//            String heroClass = (String) bundle.get(SecondFragment.HERO_CLASS);
-//            // Log.i : information ; Log.w : warning ; Log.e : error ; Log.d : debug ; Log.v : verbose
-//            Log.i("Form data", heroName + " - " + heroRace + " - " + heroClass);
-//            Hero hero = createHeroFromInfos(heroName, heroRace, heroClass);
-//            Log.i("Heroes creation", hero.toString());
-//            binding.textViewName.setText(heroName);
-//            binding.textViewRace.setText(heroRace.toString());
-//            binding.textViewClass.setText(heroClass);
+            hero = (Hero) bundle.getSerializable(SecondFragment.HERO);
         }
+
+        Monsters tuktuk = new Dragon(60);
+
+        binding.textViewClass.setText(hero.toString());
+        binding.textViewRace.setText(tuktuk.toString());
+
+        while (hero.attack(tuktuk) && tuktuk.attack(hero)) {
+            binding.textViewClass.setText(hero.toString());
+            binding.textViewRace.setText(tuktuk.toString());
+        }
+
+        binding.textViewClass.setText(hero.toString());
+        binding.textViewRace.setText(tuktuk.toString());
+
     }
 
-    private Hero createHeroFromInfos(String name, Race race, String heroClass) {
-        Hero hero = null;
-        try {
-            Class classe = Class.forName("rpg.heros." + heroClass);
-            Constructor constructor = classe.getConstructor(Class.forName("java.lang.String"), Class.forName("rpg.Race"));
-            hero = (Hero) constructor.newInstance(name, race);
-            hero.setLevel(60);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (java.lang.InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        return hero;
-    }
 }

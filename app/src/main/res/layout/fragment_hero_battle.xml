@@ -10,7 +10,7 @@
         android:id="@+id/textViewName"
         android:layout_width="205dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="428dp"
+        android:layout_marginBottom="376dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -19,7 +19,7 @@
         android:id="@+id/textViewRace"
         android:layout_width="205dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="536dp"
+        android:layout_marginBottom="472dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,10 +28,9 @@
         android:id="@+id/textViewClass"
         android:layout_width="205dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="644dp"
+        android:layout_marginBottom="572dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout >

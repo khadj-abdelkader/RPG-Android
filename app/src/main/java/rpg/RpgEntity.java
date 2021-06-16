@@ -119,4 +119,8 @@ public abstract class RpgEntity {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return getClass() + " #" + this.level + " - " + this.hp + "/" + this.hpMax ;
+    }
 }

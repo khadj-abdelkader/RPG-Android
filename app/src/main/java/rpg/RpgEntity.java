@@ -2,6 +2,8 @@ package rpg;
 
 import java.util.Random;
 
+import rpg.heros.Hero;
+
 public abstract class RpgEntity {
 
     protected int hp = 0;
@@ -121,6 +123,11 @@ public abstract class RpgEntity {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " #" + this.level + " - " + this.hp + "/" + this.hpMax ;
+        String display = getClass().getSimpleName() + " lvl" + this.level + " - " + this.hp + "/" + this.hpMax;
+        if (this instanceof Hero) {
+            Hero thisHero = ((Hero) this);
+            display = thisHero.getName() + " - " + thisHero.getRace().getName() + " " + display;
+        }
+        return display;
     }
 }

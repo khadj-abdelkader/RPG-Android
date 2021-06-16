@@ -72,7 +72,7 @@ public abstract class Hero extends RpgEntity {
     public abstract void levelUp();
 
     public void setLevel(int level) {
-        this.level = level;
+        this.level = level - 1;
     }
 
     public void setCaracLevelUp(int strength, int agility, int intelligence, int mainCarac) {

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.test.databinding.FragmentFirstBinding;
 
@@ -54,6 +55,14 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addValue(-0.5);
+            }
+        });
+
+        binding.buttonRpg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
     }

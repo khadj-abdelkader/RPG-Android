@@ -49,4 +49,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Spinner
+        android:id="@+id/snipperClass"
+        android:layout_width="215dp"
+        android:layout_height="38dp"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteX="89dp"
+        tools:layout_editor_absoluteY="169dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

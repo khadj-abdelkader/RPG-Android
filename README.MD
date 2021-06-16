@@ -232,3 +232,8 @@ Deux packages dans "rpg" :
     * monsters
     
     
+    
+### Suite...
+
+* Créer un Spinner (de type dropdown) pour sélectionner les différentes classes disponibles dans le jeu
+* Dans le onClick du SecondFragment, créer le hero adéquat en fonction du choix de l'utilisateur

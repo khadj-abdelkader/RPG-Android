@@ -123,7 +123,7 @@ public abstract class RpgEntity {
 
     @Override
     public String toString() {
-        String display = getClass().getSimpleName() + " lvl" + this.level + " - " + this.hp + "/" + this.hpMax;
+        String display = this.getClass().getSimpleName() + " lvl" + this.level + " - " + this.hp + "/" + this.hpMax;
         if (this instanceof Hero) {
             Hero thisHero = ((Hero) this);
             display = thisHero.getName() + " - " + thisHero.getRace().getName() + " " + display;

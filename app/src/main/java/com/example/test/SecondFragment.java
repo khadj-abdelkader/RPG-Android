@@ -8,22 +8,25 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.test.databinding.FragmentSecondBinding;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 import rpg.Race;
-import rpg.heros.Hero;
 
 public class SecondFragment extends Fragment {
+
+    public static final String HERO_NAME = "heroName";
+    public static final String HERO_RACE = "heroRace";
+    public static final String HERO_CLASS = "heroClass";
 
     private FragmentSecondBinding binding;
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            LayoutInflater inflater,
+            ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -51,31 +54,17 @@ public class SecondFragment extends Fragment {
                 String heroName = binding.editTextHeroName.getText().toString();
                 long id = binding.spinnerRace.getSelectedItemId();
                 Race race = (Race.values())[(int) id];
-                String selectedClasse = binding.spinnerClasses.getSelectedItem().toString();
+                String selectedClass = binding.spinnerClasses.getSelectedItem().toString();
 
-                try {
-                    Class classe = Class.forName("rpg.heros." + selectedClasse);
-                    Constructor constructor = classe.getConstructor(Class.forName("java.lang.String"), Class.forName("rpg.Race"));
-                    Hero hero = (Hero) constructor.newInstance(heroName, race);
-                    hero.setLevel(60);
-                    binding.textViewHero.setText(hero.toString());
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (java.lang.InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                }
+                Bundle bundle = new Bundle();
+                bundle.putString(SecondFragment.HERO_NAME, heroName);
+                bundle.putString(SecondFragment.HERO_RACE, race.toString());
+                bundle.putString(SecondFragment.HERO_CLASS, selectedClass);
+                HeroBattleFragment hbf = new HeroBattleFragment();
+                hbf.setArguments(bundle);
 
-//                binding.textViewHero.setText(hero.toString());
-//                NavHostFragment.findNavController(SecondFragment.this)
-//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_HeroBattleFragment);
             }
         });
     }

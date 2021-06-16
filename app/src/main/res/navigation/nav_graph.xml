@@ -15,6 +15,7 @@
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.test.SecondFragment"
@@ -22,7 +23,14 @@
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SecondFragment_to_HeroBattleFragment"
+            app:destination="@id/HeroBattleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HeroBattleFragment"
+        android:name="com.example.test.HeroBattleFragment"
+        android:label="@string/battle_hero"
+        tools:layout="@layout/fragment_hero_battle">
     </fragment>
 </navigation>

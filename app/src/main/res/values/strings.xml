@@ -14,4 +14,8 @@
     <string name="create_hero">Create my Hero</string>
     <string name="hero_name">Hero name</string>
     <string name="race_label">Choose race</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="battle_hero">Battle Hero</string>
 </resources>

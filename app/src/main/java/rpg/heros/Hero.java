@@ -1,9 +1,11 @@
 package rpg.heros;
 
+import java.io.Serializable;
+
 import rpg.Race;
 import rpg.RpgEntity;
 
-public abstract class Hero extends RpgEntity {
+public abstract class Hero extends RpgEntity implements Serializable {
 
     protected String name;
     protected Race race;

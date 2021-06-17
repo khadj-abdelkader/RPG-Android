@@ -8,20 +8,28 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.test.databinding.FragmentSecondBinding;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import rpg.Race;
 import rpg.heros.Hero;
-import rpg.heros.Mage;
 
 public class SecondFragment extends Fragment {
+
+    public static final String HERO = "hero";
 
     private FragmentSecondBinding binding;
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            LayoutInflater inflater,
+            ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -37,17 +45,23 @@ public class SecondFragment extends Fragment {
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         binding.spinnerRace.setAdapter(adapter);
 
+        String[] classes = new String[]{"Mage", "Warrior", "Rogue"};
+
+        ArrayAdapter<String> adapterClasse = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, classes);
+        adapterClasse.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        binding.spinnerClasses.setAdapter(adapterClasse);
+
         binding.buttonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String heroName = binding.editTextHeroName.getText().toString();
                 long id = binding.spinnerRace.getSelectedItemId();
                 Race race = (Race.values())[(int) id];
-                Hero hero = new Mage(heroName, race);
-                hero.setLevel(60);
-                binding.textViewHero.setText(hero.toString());
-//                NavHostFragment.findNavController(SecondFragment.this)
-//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                String selectedClass = binding.spinnerClasses.getSelectedItem().toString();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(SecondFragment.HERO, createHeroFromInfos(heroName, race, selectedClass));
+                Navigation.findNavController(view).navigate(R.id.action_SecondFragment_to_HeroBattleFragment, bundle);
             }
         });
     }
@@ -56,6 +70,29 @@ public class SecondFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private Hero createHeroFromInfos(String name, Race race, String heroClass) {
+        Hero hero = null;
+        try {
+            Class classe = Class.forName("rpg.heros." + heroClass);
+            Constructor constructor = classe.getConstructor(Class.forName("java.lang.String"), Class.forName("rpg.Race"));
+            hero = (Hero) constructor.newInstance(name, race);
+            hero.setLevel(60);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (java.lang.InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return hero;
     }
 
 }

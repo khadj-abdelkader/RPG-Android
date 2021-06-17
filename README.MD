@@ -241,6 +241,8 @@ Deux packages dans "rpg" :
 
 ### Améliorer HeroBattleFragment
 
+* Ajouter dans HeroBattleFragment, un bouton (en haut de la vue) ayant le texte de votre choix, qui permette d'afficher un récap complet
+    de notre Hero (toutes ses stats)
 * Lorsque l'on arrive sur HeroBattleFragment, on doit toujours voir les stats de notre hero (notre héro sera bien niveau 1)
 * On doit pouvoir sélectionner un adversaire : pour se faire, on choisira dans un spinner (dropdown) quel Monstre on veut tuer,
    puis son level, par défaut, il sera de 1 

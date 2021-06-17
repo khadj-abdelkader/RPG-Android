@@ -10,7 +10,7 @@
         android:id="@+id/textViewName"
         android:layout_width="205dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="376dp"
+        android:layout_marginBottom="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -19,7 +19,7 @@
         android:id="@+id/textViewRace"
         android:layout_width="205dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="472dp"
+        android:layout_marginBottom="312dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,9 +28,30 @@
         android:id="@+id/textViewClass"
         android:layout_width="205dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="572dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerMonster"
+        android:layout_width="200dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="584dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonFight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="496dp"
+        android:text="FIGHT !!!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout >

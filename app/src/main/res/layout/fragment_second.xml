@@ -23,7 +23,7 @@
         android:id="@+id/spinnerRace"
         android:layout_width="214dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="536dp"
+        android:layout_marginBottom="516dp"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         android:id="@+id/spinnerClasses"
         android:layout_width="214dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="460dp"
+        android:layout_marginBottom="452dp"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,27 +45,11 @@
         android:id="@+id/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="368dp"
+        android:layout_marginBottom="272dp"
         android:text="@string/create_hero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewHero"
-        android:layout_width="353dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="248dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Spinner
-        android:id="@+id/snipperClass"
-        android:layout_width="215dp"
-        android:layout_height="38dp"
-        android:spinnerMode="dropdown"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="169dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

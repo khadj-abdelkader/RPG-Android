@@ -237,3 +237,25 @@ Deux packages dans "rpg" :
 
 * Créer un Spinner (de type dropdown) pour sélectionner les différentes classes disponibles dans le jeu
 * Dans le onClick du SecondFragment, créer le hero adéquat en fonction du choix de l'utilisateur
+
+
+### Améliorer HeroBattleFragment
+
+* Lorsque l'on arrive sur HeroBattleFragment, on doit toujours voir les stats de notre hero (notre héro sera bien niveau 1)
+* On doit pouvoir sélectionner un adversaire : pour se faire, on choisira dans un spinner (dropdown) quel Monstre on veut tuer,
+   puis son level, par défaut, il sera de 1 
+* Une fois le "formulaire" rempli, il se validera par un bouton "Battle" qui exécutera une fonction de combat, dans lequel : 
+    - le 1er combattant à taper sera déterminé aléatoirement
+    - Les 2 protagonistes continuent le combat tant qu'il n'y en a pas un de mort
+    
+* L'idée est :
+ - Une fois le combat fini :
+   * (Peut-être vous devrez modifier nos classes métiers)
+   * Lorsque le Hero tue un Gobelin, il gagne 1 lvl
+   * Lorsque le Hero tue un Ogre, il gagne 2 lvl
+   * Lorsque le Hero tue un Dragon, il gagne 5 lvl
+   * Il doit être possible de relancer autant de combats que l'on veut, tant que le Hero n'est pas mort
+   * Entre chaque combat, il revient à son maximum d'HP
+   * (Car on suppose que par la suite, il pourrait attaquer plusieurs monstres en même temps...)
+    
+    

@@ -56,7 +56,6 @@ public class HeroBattleFragment extends Fragment {
 
         binding.textViewClass.setText(hero.toString());
         binding.textViewRace.setText(tuktuk.toString());
-
     }
 
 }

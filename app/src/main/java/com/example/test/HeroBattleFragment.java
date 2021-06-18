@@ -1,12 +1,13 @@
 package com.example.test;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.Trace;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,20 +16,15 @@ import android.widget.ArrayAdapter;
 
 import com.example.test.databinding.FragmentHeroBattleBinding;
 
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import rpg.Race;
+import dao.AppDataBase;
 import rpg.RpgEntity;
 import rpg.heros.Hero;
-import rpg.monsters.Dragon;
-import rpg.monsters.Gobelin;
+import rpg.heros.HeroStorage;
 import rpg.monsters.Monsters;
-import rpg.monsters.Ogre;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +48,7 @@ public class HeroBattleFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
@@ -65,6 +62,13 @@ public class HeroBattleFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(SecondFragment.HERO, finalHero);
                 Navigation.findNavController(view).navigate(R.id.action_HeroBattleFragment_to_StatsHeroFragment, bundle);
+            }
+        });
+        binding.buttonBestRecords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(HeroBattleFragment.this)
+                        .navigate(R.id.action_HeroBattleFragment_to_BestRecordsFragment);
             }
         });
 
@@ -104,16 +108,18 @@ public class HeroBattleFragment extends Fragment {
                 binding.textViewBattleHero.setText(firstFighter.toString());
                 binding.textViewBattleMonster.setText(secondFighter.toString());
                 while (!firstFighter.isDead() && !secondFighter.isDead()) {
-                    String infoFirst = "1st : " + firstFighter.toString() + "\n" + secondFighter.attack(firstFighter);
-                    String infoSecond = "2nd : " + secondFighter.toString() + "\n" + firstFighter.attack(secondFighter);
+                    String firstAtk = firstFighter.attack(secondFighter);
+                    String secondAtk = secondFighter.attack(firstFighter);
+                    String infoFirst = "1st : " + firstFighter.toString() + "\n" + secondAtk;
+                    String infoSecond = "2nd : " + secondFighter.toString() + "\n" + firstAtk;
                     binding.textViewBattleHero.setText(infoFirst);
                     binding.textViewBattleMonster.setText(infoSecond);
+                    nbTurns++;
                     try {
                         Thread.sleep(1600);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    nbTurns++;
                 }
                 String battle = "Partie terminée en " + nbTurns + " rounds";
                 String victor = ", victoire de " + firstFighter.getClass().getSimpleName();
@@ -129,6 +135,18 @@ public class HeroBattleFragment extends Fragment {
                 }
                 battle += victor;
                 binding.textViewBattleTurn.setText(battle);
+                if (hero.isDead()) {
+                    HeroStorage heroStorage = new HeroStorage(
+                            hero.getName(), hero.getClass().getSimpleName(), hero.getLevel(), hero.getRace().getName()
+                    );
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppDataBase.getInstance(getContext()).heroStorageDao().insertHeroStorage(heroStorage);
+                            Log.i("INSERT DB", "run: Hero ajouté " + heroStorage.getName() + " (" + heroStorage.getUid() + ")");
+                        }
+                    });
+                }
             }
         });
         battle.start();

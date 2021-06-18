@@ -1,5 +1,8 @@
 package rpg;
 
+import androidx.room.Entity;
+
+@Entity
 public class Ability {
 
     private float damage;

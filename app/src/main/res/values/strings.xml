@@ -19,4 +19,7 @@
     <string name="battle_hero">Battle Hero</string>
     <string name="hero_stats">Stats Hero</string>
     <string name="startFight">Start Fight</string>
+    <string name="best_records">Best Records</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

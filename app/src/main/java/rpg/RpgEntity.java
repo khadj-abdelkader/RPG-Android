@@ -1,12 +1,10 @@
 package rpg;
 
-import android.util.Log;
-
-import javax.security.auth.login.LoginException;
-
 import rpg.heros.Hero;
 
 public abstract class RpgEntity {
+
+    protected int uid;
 
     protected int hp = 0;
     protected int hpMax = 0;
@@ -68,6 +66,10 @@ public abstract class RpgEntity {
         return damageMax;
     }
 
+    public int getUid() {
+        return uid;
+    }
+
     private int getRandomBetweenNumber(float fLow, float fHigh) {
         double low = Math.floor(fLow);
         double high = Math.ceil(fHigh);
@@ -121,7 +123,6 @@ public abstract class RpgEntity {
     }
 
     private boolean useAbility(RpgEntity rpgEntityTarget) {
-        Log.i("Ability CD", "useAbility: " + this.ability.getCoolDown());
         if (this.ability.getCoolDown() == 0 && this.ability.getManaCost() <= this.mana) {
             this.ability.setCoolDown(3);
             rpgEntityTarget.reduceHp((int) this.ability.getDamage());

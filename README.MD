@@ -259,5 +259,9 @@ Deux packages dans "rpg" :
    * Il doit être possible de relancer autant de combats que l'on veut, tant que le Hero n'est pas mort
    * Entre chaque combat, il revient à son maximum d'HP
    * (Car on suppose que par la suite, il pourrait attaquer plusieurs monstres en même temps...)
-    
-    
+
+
+### Créer un nouveau Fragment
+
+* Depuis le fragment HeroBattleFragment, créer un bouton "Best records" qui permet d'aller sur le nouveau fragment
+* Le nouveau fragment s'appellera BestRecordsFragment et il affichera les informations des "HeroStorage" dans une table

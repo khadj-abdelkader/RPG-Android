@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.example.test.SecondFragment;
 import com.example.test.databinding.FragmentHeroBattleBinding;
 
 import java.lang.reflect.Constructor;

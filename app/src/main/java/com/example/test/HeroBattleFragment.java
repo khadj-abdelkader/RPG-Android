@@ -1,4 +1,4 @@
-package com.example.test;
+gitpackage com.example.test;
 
 import android.os.Bundle;
 

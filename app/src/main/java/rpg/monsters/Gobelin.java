@@ -3,7 +3,7 @@ package rpg.monsters;
 public class Gobelin extends Monsters {
 
     public Gobelin(int level) {
-        super(level);
+        super(level, 1);
         this.hp = 38 + 50 * level;
         this.hpMax = this.hp;
         this.mana = 30 + 50 * level;

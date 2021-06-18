@@ -32,5 +32,14 @@
         android:name="com.example.test.HeroBattleFragment"
         android:label="@string/battle_hero"
         tools:layout="@layout/fragment_hero_battle">
+        <action
+            android:id="@+id/action_HeroBattleFragment_to_StatsHeroFragment"
+            app:destination="@id/statsHeroFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/statsHeroFragment"
+        android:name="com.example.test.StatsHeroFragment"
+        android:label="@string/hero_stats"
+        tools:layout="@layout/fragment_stats_hero" />
 </navigation>

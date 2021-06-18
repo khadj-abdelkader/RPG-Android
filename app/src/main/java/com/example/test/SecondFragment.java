@@ -78,7 +78,6 @@ public class SecondFragment extends Fragment {
             Class classe = Class.forName("rpg.heros." + heroClass);
             Constructor constructor = classe.getConstructor(Class.forName("java.lang.String"), Class.forName("rpg.Race"));
             hero = (Hero) constructor.newInstance(name, race);
-            hero.setLevel(60);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {

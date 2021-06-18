@@ -3,7 +3,7 @@ package rpg.monsters;
 public class Dragon extends Monsters {
 
     public Dragon(int level) {
-        super(level);
+        super(level, 5);
         this.hp = 100 + 133 * level;
         this.hpMax = this.hp;
         this.mana = 50 + 70 * level;

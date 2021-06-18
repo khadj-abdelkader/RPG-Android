@@ -29,8 +29,11 @@ public abstract class Hero extends RpgEntity implements Serializable {
 
     public void setStrength(int strength) {
         this.strength += strength;
-        this.hp += strength * 19;
+        this.hp += strength * 19 + ((this.hpMax - this.hp) / 2);
         this.hpMax += strength * 19;
+        if (this.hp > this.hpMax) {
+            this.hp = this.hpMax;
+        }
     }
 
     public void setAgility(int agility) {
@@ -40,8 +43,11 @@ public abstract class Hero extends RpgEntity implements Serializable {
 
     public void setIntelligence(int intelligence) {
         this.intelligence += intelligence;
-        this.mana += intelligence * 17;
+        this.mana += intelligence * 17 + ((this.manaMax - this.mana) / 2);
         this.manaMax += intelligence * 17;
+        if (this.mana > this.manaMax) {
+            this.mana = this.manaMax;
+        }
     }
 
     public void setAttributesFromMainCarac(int mainCarac) {
@@ -73,15 +79,28 @@ public abstract class Hero extends RpgEntity implements Serializable {
 
     public abstract void levelUp();
 
+    public abstract void updateAbility();
+
     public void setLevel(int level) {
         this.level = level - 1;
     }
 
+    public void addLevel(int level) {
+        for(int i = 0; i < level; i++) {
+            levelUp();
+        }
+    }
+
     public void setCaracLevelUp(int strength, int agility, int intelligence, int mainCarac) {
+        // Si la force n'est pas la main carac du personnage on monte sa force de 1 en plus
+        if (strength != mainCarac && this.level%3 == 0) {
+            strength++;
+        }
         setStrength(strength);
         setAgility(agility);
         setIntelligence(intelligence);
         setAttributesFromMainCarac(mainCarac);
+        updateAbility();
     }
 
 }

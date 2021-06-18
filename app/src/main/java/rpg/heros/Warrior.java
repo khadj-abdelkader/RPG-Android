@@ -18,6 +18,11 @@ public class Warrior extends Hero {
     }
 
     @Override
+    public void updateAbility() {
+        this.ability.setDamage(1.8f * this.strength);
+    }
+
+    @Override
     public void setLevel(int level) {
         super.setLevel(level);
         setCaracLevelUp(MAIN_CARAC + 6 * level, 12 + 2 * level, 14 + level, MAIN_CARAC + 6 * level);

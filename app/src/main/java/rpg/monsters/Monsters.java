@@ -4,9 +4,15 @@ import rpg.RpgEntity;
 
 public abstract class Monsters extends RpgEntity {
 
-    public Monsters(int level) {
+    protected int givenLevel;
+
+    public Monsters(int level, int givenLevel) {
         this.level = level;
         this.criticalDamage = 1.5f;
+        this.givenLevel = givenLevel;
     }
 
+    public int getGivenLevel() {
+        return givenLevel;
+    }
 }

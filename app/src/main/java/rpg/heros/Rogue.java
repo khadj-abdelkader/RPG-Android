@@ -19,6 +19,11 @@ public class Rogue extends Hero {
     }
 
     @Override
+    public void updateAbility() {
+        this.ability.setDamage(2.1f * this.agility);
+    }
+
+    @Override
     public void setLevel(int level) {
         super.setLevel(level);
         setCaracLevelUp(12 + 2 * level, MAIN_CARAC + 6 * level, 11 + level, MAIN_CARAC + 6 * level);

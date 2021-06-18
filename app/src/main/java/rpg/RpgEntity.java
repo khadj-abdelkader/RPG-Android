@@ -1,6 +1,8 @@
 package rpg;
 
-import java.util.Random;
+import android.util.Log;
+
+import javax.security.auth.login.LoginException;
 
 import rpg.heros.Hero;
 
@@ -20,6 +22,14 @@ public abstract class RpgEntity {
 
     public int getHp() {
         return hp;
+    }
+
+    protected void reduceHp(int hp) {
+        if (hp > this.hp) {
+            this.hp = 0;
+        } else {
+            this.hp -= hp;
+        }
     }
 
     public int getHpMax() {
@@ -59,10 +69,9 @@ public abstract class RpgEntity {
     }
 
     private int getRandomBetweenNumber(float fLow, float fHigh) {
-        Random r = new Random();
-        int low = (int) Math.floor(fLow);
-        int high = (int) Math.ceil(fHigh);
-        return r.nextInt(high-low) + low;
+        double low = Math.floor(fLow);
+        double high = Math.ceil(fHigh);
+        return (int)(low + (int)(Math.random() * ((high - low) + 1)));
     }
 
     public boolean isDead() {
@@ -85,33 +94,37 @@ public abstract class RpgEntity {
         this.ability = new Ability(name, damage, manaCost);
     }
 
-    public boolean attack(RpgEntity rpgEntityTarget) {
+    public String attack(RpgEntity rpgEntityTarget) {
+        String info = "";
         if (this.isDead() || rpgEntityTarget.isDead()) {
-            return false;
+            return "Victoire !";
         }
 
         if (this.ability != null) {
             boolean hasUsedAbility = useAbility(rpgEntityTarget);
             if (hasUsedAbility) {
-                return true;
+                return "-" + (int) this.ability.getDamage() + " (ability)";
             }
         }
 
         int damage = getRandomBetweenNumber(this.damageMin, this.damageMax);
         if (getRandomBetweenNumber(0f, 100f) <= this.scoreCriticalStrike) {
             damage *= this.criticalDamage;
+            info = "(CC) ";
         }
 
         damage *= rpgEntityTarget.getDefenseCoefficient();
 
-        rpgEntityTarget.hp -= damage;
-        return true;
+        info += "-" + damage;
+        rpgEntityTarget.reduceHp(damage);
+        return info;
     }
 
     private boolean useAbility(RpgEntity rpgEntityTarget) {
+        Log.i("Ability CD", "useAbility: " + this.ability.getCoolDown());
         if (this.ability.getCoolDown() == 0 && this.ability.getManaCost() <= this.mana) {
             this.ability.setCoolDown(3);
-            rpgEntityTarget.hp -= this.ability.getDamage();
+            rpgEntityTarget.reduceHp((int) this.ability.getDamage());
             this.mana -= this.ability.getManaCost();
             return true;
         }
@@ -123,7 +136,7 @@ public abstract class RpgEntity {
 
     @Override
     public String toString() {
-        String display = this.getClass().getSimpleName() + " lvl" + this.level + " - " + this.hp + "/" + this.hpMax;
+        String display = this.getClass().getSimpleName() + " lvl" + this.level + " - " + this.hp + "/" + this.hpMax + " - " + this.mana + "/" + this.manaMax;
         if (this instanceof Hero) {
             Hero thisHero = ((Hero) this);
             display = thisHero.getName() + " - " + thisHero.getRace().getName() + " " + display;

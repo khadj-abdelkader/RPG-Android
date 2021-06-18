@@ -18,6 +18,11 @@ public class Mage extends Hero {
     }
 
     @Override
+    public void updateAbility() {
+        this.ability.setDamage(2 * this.intelligence);
+    }
+
+    @Override
     public void setLevel(int level) {
         super.setLevel(level);
         setCaracLevelUp(13 + 2 * level, 8 + level, MAIN_CARAC + 6 * level, MAIN_CARAC + 6 * level);

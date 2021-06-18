@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_HeroBattleFragment_to_StatsHeroFragment"
             app:destination="@id/statsHeroFragment" />
+        <action
+            android:id="@+id/action_HeroBattleFragment_to_BestRecordsFragment"
+            app:destination="@id/bestRecordsFragment" />
     </fragment>
 
     <fragment
@@ -42,4 +45,10 @@
         android:name="com.example.test.StatsHeroFragment"
         android:label="@string/hero_stats"
         tools:layout="@layout/fragment_stats_hero" />
+
+    <fragment
+        android:id="@+id/bestRecordsFragment"
+        android:name="com.example.test.BestRecordsFragment"
+        android:label="@string/best_records"
+        tools:layout="@layout/fragment_best_records" />
 </navigation>

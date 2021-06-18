@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,13 @@ public class HeroBattleFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(SecondFragment.HERO, finalHero);
                 Navigation.findNavController(view).navigate(R.id.action_HeroBattleFragment_to_StatsHeroFragment, bundle);
+            }
+        });
+        binding.buttonBestRecords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(HeroBattleFragment.this)
+                        .navigate(R.id.action_HeroBattleFragment_to_BestRecordsFragment);
             }
         });
 
